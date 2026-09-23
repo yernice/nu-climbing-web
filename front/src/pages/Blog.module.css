@@ -1,0 +1,8 @@
+.layout {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+}

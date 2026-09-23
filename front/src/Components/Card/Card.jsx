@@ -6,7 +6,7 @@ function Card({ cardImage=defaultImage, cardTitle="Blog Title", cardIntro="Blog 
         <div className={styles.card}>
             <img src={cardImage} alt="Blog Post Image"></img>
             <div className={styles.content}>
-                <h1>{cardTitle}</h1>
+                <h2>{cardTitle}</h2>
                 <p>{cardIntro}</p>
             </div>
         </div>

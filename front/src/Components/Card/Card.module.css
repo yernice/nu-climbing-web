@@ -2,20 +2,21 @@
     border: solid;
     border-color: grey;
     border-radius: 20px;
-    width: 60%;
+    width: 50vw;
     display: flex;
     justify-content: left;
 
     margin: 20px;
+    margin-top: 0px;
     padding: 10px;
 }
 
 .card img {
-    height: 300px;
-    width: auto;
+    width: 40%;
+    height: auto;
 }
 
-.card content {
-    margin-left: 10px;
-    margin-right: 10px;
+.card .content {
+    margin-left: 20px;
+    margin-right: 20px;
 }
