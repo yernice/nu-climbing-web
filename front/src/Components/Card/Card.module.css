@@ -1,22 +1,30 @@
 .card {
-    border: solid;
-    border-color: grey;
-    border-radius: 20px;
-    width: 50vw;
+    width: 250px;
+    height: 275px;
+    padding: 0;
     display: flex;
-    justify-content: left;
-
-    margin: 20px;
-    margin-top: 0px;
-    padding: 10px;
+    flex-direction: column;
+    background-color: rgb(242, 240, 79);
 }
 
 .card img {
-    width: 40%;
-    height: auto;
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
 }
 
-.card .content {
-    margin-left: 20px;
-    margin-right: 20px;
+.card h2 {
+    font-size: 30px;
+    font-family: 'HeadingFont', sans-serif;
+    margin: 5px 10px;
+}
+
+.card p {
+    font-size: 15px;
+    font-family: 'BodyFont', sans-serif;
+    text-decoration: underline;
+    margin: 0 10px;
+    cursor: pointer;
 }

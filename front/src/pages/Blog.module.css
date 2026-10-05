@@ -1,8 +1,11 @@
-.layout {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    width: 90%;
-    margin: 0 auto;
-    padding: 20px;
+.feed {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px 20px;
+    margin: 0px 190px;
+    justify-items: stretch;
+}
+
+.feed Card {
+    margin-top: 20px;
 }
