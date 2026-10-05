@@ -28,3 +28,17 @@
     margin: 0 10px;
     cursor: pointer;
 }
+
+.imageWrapper {
+    position: relative;
+}
+
+.date {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: rgb(242, 240, 79);
+    padding: 4px 8px;
+    font-size: 15px;
+    font-family: 'HeadingFont', sans-serif;
+}

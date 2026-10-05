@@ -13,6 +13,7 @@ function Blog() {
                             key={post.id}
                             cardTitle={post.title}
                             cardImage={post.image}
+                            cardDate={post.card_date}
                         />
                     ))}
             </div>
