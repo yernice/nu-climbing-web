@@ -1,16 +1,7 @@
 import { useEffect, useState } from 'react'
 import Card from '../Components/Card/Card.jsx'
-import Hero from '../Components/Hero/Hero.jsx'
 import { getPosts, getLatestPost } from '../api/posts.js'
-import styles from './Blog.module.css'
-
-const INTRO_LENGTH = 150
-
-function makeIntro(paragraphs) {
-    const text = paragraphs[0] ?? ""
-    if (text.length <= INTRO_LENGTH) return text
-    return text.slice(0, INTRO_LENGTH).replace(/\s+\S*$/, "") + "…"
-}
+import { makeIntro } from '../utils/excerpt.js'
 
 function Blog() {
     const [posts, setPosts] = useState([])
@@ -23,18 +14,9 @@ function Blog() {
 
     return (
         <>
-            {latest && (
-                <Hero
-                    heroImage={latest.image}
-                    heroTitle={latest.title}
-                    heroText={makeIntro(latest.text)}
-                    buttonText="READ MORE"
-                    buttonLink={`/blog/${latest.id}`}
-                />
-            )}
             <main className="page">
                 <h1>Our Blog</h1>
-                <div className={styles.feed}>
+                <div className="card-grid">
                     {posts.map(post => (
                         <Card
                             key={post.id}
@@ -42,6 +24,7 @@ function Blog() {
                             cardTitle={post.title}
                             cardImage={post.image}
                             cardDate={post.card_date}
+                            cardText={makeIntro(post.text)}
                         />
                     ))}
                 </div>

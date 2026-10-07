@@ -1,0 +1,21 @@
+.button {
+    font-size: 20px;
+    font-family: 'HeadingFont', sans-serif;
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.small {
+    padding: 6px 14px;
+}
+
+.disabled,
+.button:disabled {
+    background-color: var(--color-disabled);
+    cursor: default;
+}
