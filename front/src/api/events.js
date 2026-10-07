@@ -11,6 +11,12 @@ export async function getEvents() {
     return [...upcoming, ...past]
 }
 
+// The soonest event that has not started yet, or null.
+export async function getNextEvent() {
+    const upcoming = await getEvents()
+    return upcoming.find(event => !isPast(event)) ?? null
+}
+
 export async function getEvent(id) {
     return events.find(event => event.id === Number(id)) ?? null
 }

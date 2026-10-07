@@ -6,6 +6,7 @@
     margin: 0 0 20px;
     padding: 12px 16px;
     background-color: var(--color-yellow);
+    color: var(--color-brown);
 }
 
 .details div {

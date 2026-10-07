@@ -29,6 +29,18 @@
     justify-items: stretch;
 }
 
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+@media (max-width: 720px) {
+    .course-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 h1 {
     font-size: 40px;
     font-family: 'HeadingFont', sans-serif;

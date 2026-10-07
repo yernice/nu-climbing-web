@@ -14,6 +14,17 @@
     padding: 6px 14px;
 }
 
+.outline {
+    border: 2px solid black;
+    background-color: white;
+    color: black;
+    padding: 8px 18px;
+}
+
+.outline.small {
+    padding: 4px 12px;
+}
+
 .disabled,
 .button:disabled {
     background-color: var(--color-disabled);

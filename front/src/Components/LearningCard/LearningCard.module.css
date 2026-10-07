@@ -3,7 +3,7 @@
     grid-template-columns: 1fr 1fr;
     aspect-ratio: 5 / 3;
     overflow: hidden;
-    color: inherit;
+    color: var(--color-brown);
     text-decoration: none;
     background-color: var(--color-yellow);
 }

@@ -1,0 +1,23 @@
+.projects {
+    background-color: var(--color-yellow);
+    padding: 40px 0;
+    margin-bottom: 40px;
+}
+
+.rows {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.heading {
+    margin: 0 0 20px;
+    font-size: 32px;
+    font-family: 'HeadingFont', sans-serif;
+}
+
+.seeAll {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px 0 40px;
+}
