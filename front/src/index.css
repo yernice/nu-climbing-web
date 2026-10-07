@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'HeadingFont';
+    src: url('./assets/fonts/Tanker-Regular.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'BodyFont';
+    src: url('./assets/fonts/BespokeSerif-Regular.otf') format('opentype');
+}
+
+.page {
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h1 {
+    font-size: 40px;
+    font-family: 'HeadingFont', sans-serif;
+}

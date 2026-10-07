@@ -1,0 +1,31 @@
+.back {
+    display: inline-block;
+    margin-top: 20px;
+    font-family: 'HeadingFont', sans-serif;
+    font-size: 20px;
+    color: rgb(31, 12, 0);
+    text-decoration: underline;
+}
+
+.date {
+    display: inline-block;
+    background-color: rgb(242, 240, 79);
+    padding: 4px 8px;
+    font-size: 15px;
+    font-family: 'HeadingFont', sans-serif;
+}
+
+.image {
+    display: block;
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    margin: 20px 0;
+}
+
+.text p {
+    font-size: 20px;
+    font-family: 'BodyFont', sans-serif;
+    line-height: 1.5;
+    max-width: 720px;
+}

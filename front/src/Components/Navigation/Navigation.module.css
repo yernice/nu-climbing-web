@@ -1,6 +1,8 @@
 .navbar ul {
+    font-size: 25px;
+    font-family: 'HeadingFont', sans-serif;
     list-style-type: none;
-    background-color: antiquewhite;
+    background-color: white;
     margin: 0px;
     padding: 0px;
     overflow: hidden;
