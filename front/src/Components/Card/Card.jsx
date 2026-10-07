@@ -10,7 +10,7 @@ function Card({ to, cardImage=defaultImage, cardTitle="Blog Title", cardDate="00
                 <span className={styles.date}>{cardDate}</span>
             </div>
             <h2>{cardTitle}</h2>
-            <p>READ MORE</p>
+            <p>READ MORE →</p>
         </Link>
     );
 }
