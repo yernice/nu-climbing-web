@@ -1,7 +1,9 @@
 .card {
-    width: 250px;
+    width: 100%;
     height: 260px;
     padding: 0;
+    color: inherit;
+    text-decoration: none;
     display: flex;
     flex-direction: column;
     background-color: rgb(242, 240, 79);
