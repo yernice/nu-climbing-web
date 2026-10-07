@@ -10,6 +10,10 @@ export async function getLatestPost() {
     return posts.reduce((latest, post) => (!latest || post.id > latest.id ? post : latest), null)
 }
 
+export async function getLatestPosts(count) {
+    return [...posts].sort((a, b) => b.id - a.id).slice(0, count)
+}
+
 export async function getPost(id) {
     return posts.find(post => post.id === Number(id)) ?? null
 }

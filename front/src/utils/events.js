@@ -23,6 +23,18 @@ export function formatEventTime(event) {
     return `${pad(date.getDate())}.${pad(date.getMonth() + 1)}.${date.getFullYear()}, ${pad(date.getHours())}:${pad(date.getMinutes())}`
 }
 
+// 29.08.2026
+export function formatEventDate(event) {
+    const date = new Date(event.startDate)
+    return `${pad(date.getDate())}.${pad(date.getMonth() + 1)}.${date.getFullYear()}`
+}
+
+// 09:00
+export function formatEventClock(event) {
+    const date = new Date(event.startDate)
+    return `${pad(date.getHours())}:${pad(date.getMinutes())}`
+}
+
 export function formatSlots(event) {
     return `${event.registered} / ${event.capacity}`
 }
