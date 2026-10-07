@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styles from './Hero.module.css'
 
 function Hero({ heroImage, heroTitle, heroText, buttonText, buttonLink }) {
@@ -6,7 +7,7 @@ function Hero({ heroImage, heroTitle, heroText, buttonText, buttonLink }) {
             <div className={styles.box}>
                 <h1>{heroTitle}</h1>
                 <p>{heroText}</p>
-                <a href={buttonLink} className={styles.button}>{buttonText}</a>
+                <Link to={buttonLink} className={styles.button}>{buttonText}</Link>
             </div>
         </div>
     );
