@@ -2,6 +2,7 @@
     display: inline-block;
     margin: 0 0 20px;
     background-color: var(--color-yellow);
+    color: var(--color-brown);
     padding: 4px 8px;
     font-size: 15px;
     font-family: 'HeadingFont', sans-serif;
@@ -47,4 +48,5 @@
     font-size: 20px;
     font-family: 'BodyFont', sans-serif;
     background-color: var(--color-yellow);
+    color: var(--color-brown);
 }

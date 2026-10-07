@@ -1,7 +1,7 @@
 .card {
     width: 100%;
     padding: 0;
-    color: inherit;
+    color: var(--color-brown);
     display: flex;
     flex-direction: column;
     background-color: var(--color-yellow);
@@ -72,6 +72,7 @@
     top: 10px;
     left: 10px;
     background-color: var(--color-yellow);
+    color: var(--color-brown);
     padding: 4px 8px;
     font-size: 15px;
     font-family: 'HeadingFont', sans-serif;
