@@ -3,13 +3,13 @@
     margin-top: 20px;
     font-family: 'HeadingFont', sans-serif;
     font-size: 20px;
-    color: rgb(31, 12, 0);
+    color: var(--color-text);
     text-decoration: underline;
 }
 
 .date {
     display: inline-block;
-    background-color: rgb(242, 240, 79);
+    background-color: var(--color-yellow);
     padding: 4px 8px;
     font-size: 15px;
     font-family: 'HeadingFont', sans-serif;
