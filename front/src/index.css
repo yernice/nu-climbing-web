@@ -8,6 +8,13 @@
     src: url('./assets/fonts/BespokeSerif-Regular.otf') format('opentype');
 }
 
+:root {
+    --color-yellow: #F2F079;
+    --color-brown: #492804;
+    --color-brown-hover: #6b3d06;
+    --color-text: rgb(31, 12, 0);
+}
+
 .page {
     max-width: 1060px;
     margin: 0 auto;

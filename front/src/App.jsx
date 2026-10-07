@@ -5,6 +5,7 @@ import Blog from "./pages/Blog.jsx"
 import Post from "./pages/Post.jsx"
 import Projects from "./pages/Projects.jsx"
 import Learning from "./pages/Learning.jsx"
+import Course from "./pages/Course.jsx"
 import About from "./pages/About.jsx"
 
 function App() {    
@@ -18,6 +19,7 @@ function App() {
                 <Route path="/blog/:id" element={<Post/>}/>
                 <Route path="/projects" element={<Projects/>}/>
                 <Route path="/learning" element={<Learning/>}/>
+                <Route path="/learning/:id" element={<Course/>}/>
                 <Route path="/about" element={<About/>}/>
             </Routes>
         </BrowserRouter>

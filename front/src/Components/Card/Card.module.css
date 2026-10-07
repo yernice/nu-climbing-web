@@ -6,7 +6,7 @@
     text-decoration: none;
     display: flex;
     flex-direction: column;
-    background-color: rgb(242, 240, 79);
+    background-color: var(--color-yellow);
 }
 
 .card img {
@@ -39,7 +39,7 @@
     position: absolute;
     top: 10px;
     left: 10px;
-    background-color: rgb(242, 240, 79);
+    background-color: var(--color-yellow);
     padding: 4px 8px;
     font-size: 15px;
     font-family: 'HeadingFont', sans-serif;

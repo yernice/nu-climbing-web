@@ -8,7 +8,7 @@
 }
 
 .box {
-    background-color: rgb(242, 240, 79);
+    background-color: var(--color-yellow);
     padding: 30px;
     max-width: 400px;
 }
