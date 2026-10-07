@@ -13,12 +13,20 @@
     --color-brown: #492804;
     --color-brown-hover: #6b3d06;
     --color-text: rgb(31, 12, 0);
+    --color-disabled: #8a8a8a;
 }
 
 .page {
     max-width: 1060px;
     margin: 0 auto;
     padding: 0 20px;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px 20px;
+    justify-items: stretch;
 }
 
 h1 {

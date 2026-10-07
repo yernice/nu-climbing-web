@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import Button from '../Button/Button.jsx'
 import MaterialIcon from '../MaterialIcon/MaterialIcon.jsx'
 import styles from './LearningCard.module.css'
 import defaultImage from '../../assets/default_image.jpg'
@@ -24,9 +24,9 @@ function LearningCard({ to, image=defaultImage, title="Course Title", descriptio
                     ))}
                     {hidden > 0 && <li className={styles.more}>+{hidden} more</li>}
                 </ul>
-                <Link to={to} className={styles.button}>
-                    <h3>LEARN →</h3>
-                </Link>
+                <div className={styles.action}>
+                    <Button to={to} small>LEARN</Button>
+                </div>
             </div>
         </div>
     );

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import Button from '../Button/Button.jsx'
 import styles from './Hero.module.css'
 
 function Hero({ heroImage, heroTitle, heroText, buttonText, buttonLink }) {
@@ -7,7 +7,9 @@ function Hero({ heroImage, heroTitle, heroText, buttonText, buttonLink }) {
             <div className={styles.box}>
                 <h1>{heroTitle}</h1>
                 <p>{heroText}</p>
-                <Link to={buttonLink} className={styles.button}>{buttonText}</Link>
+                <div className={styles.action}>
+                    <Button to={buttonLink}>{buttonText}</Button>
+                </div>
             </div>
         </div>
     );

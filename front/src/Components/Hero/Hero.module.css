@@ -18,13 +18,6 @@
     font-family: 'BodyFont', sans-serif;
 }
 
-.button {
-    font-size: 20px;
-    font-family: 'HeadingFont', sans-serif;
-    display: inline-block;
+.action {
     margin-top: 15px;
-    padding: 10px 20px;
-    background-color: black;
-    color: white;
-    text-decoration: none;
 }
