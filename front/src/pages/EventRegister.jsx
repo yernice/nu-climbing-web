@@ -25,6 +25,7 @@ function EventRegister() {
     const [errors, setErrors] = useState({})
     const [submitting, setSubmitting] = useState(false)
     const [done, setDone] = useState(false)
+    const [failure, setFailure] = useState(null)
 
     useEffect(() => {
         let ignore = false
@@ -60,9 +61,15 @@ function EventRegister() {
         if (Object.keys(found).length > 0) return
 
         setSubmitting(true)
-        await registerForEvent(event.id, form)
+        setFailure(null)
+        const result = await registerForEvent(event.id, form)
         setSubmitting(false)
-        setDone(true)
+        if (result.status === 'registered') {
+            setDone(true)
+        } else {
+            setErrors(result.errors)
+            setFailure(result.error ?? null)
+        }
     }
 
     return (
@@ -102,6 +109,7 @@ function EventRegister() {
                         <input name="phone" type="tel" value={form.phone} onChange={handleChange} aria-invalid={!!errors.phone} />
                         {errors.phone && <span className={styles.error} role="alert">{errors.phone}</span>}
                     </label>
+                    {failure && <p className={styles.error} role="alert">{failure}</p>}
                     <div>
                         <Button type="submit" disabled={submitting}>REGISTER</Button>
                     </div>
