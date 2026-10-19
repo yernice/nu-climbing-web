@@ -21,10 +21,22 @@ export async function getEvent(id) {
     return events.find(event => event.id === Number(id)) ?? null
 }
 
-// Mock for the future POST /events/:id/register. The backend must enforce
-// capacity, past events and duplicate emails itself.
+const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:3000'
+
+// POST /api/events/:id/register on the backend (back/), which checks capacity, past events
+// and duplicate emails again. Resolves to { status: 'registered' } or
+// { status: 'error', error, errors }, where errors has field messages like validate().
 export async function registerForEvent(id, data) {
-    void id
-    void data
-    return { status: 'registered' }
+    try {
+        const response = await fetch(`${API_URL}/api/events/${id}/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+        })
+        const body = await response.json()
+        if (response.ok) return { status: 'registered' }
+        return { status: 'error', error: body.error, errors: body.errors ?? {} }
+    } catch {
+        return { status: 'error', error: "Couldn't reach the server. Please try again.", errors: {} }
+    }
 }
