@@ -1,19 +1,33 @@
-import posts from '../assets/posts.js'
+import { getDoc, imageUrl, listDocs, paragraphs } from './client.js'
 
-// Mock data layer. When the backend is ready, replace the bodies with fetch calls.
-export async function getPosts() {
-    return posts
+const pad = n => String(n).padStart(2, '0')
+
+// Backend document -> the shape the pages use. card_date: 29.08.2026
+function toPost(doc) {
+    const date = new Date(doc.publishedAt)
+    return {
+        id: doc.id,
+        title: doc.title,
+        image: imageUrl(doc.image),
+        card_date: `${pad(date.getDate())}.${pad(date.getMonth() + 1)}.${date.getFullYear()}`,
+        text: paragraphs(doc.body),
+    }
 }
 
-// Posts have no real timestamp yet, so the highest id counts as the latest.
+// Newest first.
+export async function getPosts() {
+    return (await listDocs('posts', { sort: '-publishedAt' })).map(toPost)
+}
+
 export async function getLatestPost() {
-    return posts.reduce((latest, post) => (!latest || post.id > latest.id ? post : latest), null)
+    return (await getLatestPosts(1))[0] ?? null
 }
 
 export async function getLatestPosts(count) {
-    return [...posts].sort((a, b) => b.id - a.id).slice(0, count)
+    return (await listDocs('posts', { sort: '-publishedAt', limit: count })).map(toPost)
 }
 
 export async function getPost(id) {
-    return posts.find(post => post.id === Number(id)) ?? null
+    const doc = await getDoc('posts', id)
+    return doc ? toPost(doc) : null
 }

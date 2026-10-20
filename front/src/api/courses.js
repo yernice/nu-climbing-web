@@ -1,15 +1,31 @@
-import courses from '../assets/courses.js'
+import { getDoc, imageUrl, listDocs } from './client.js'
 
-// Mock data layer. When the backend is ready, replace the bodies with fetch calls.
-export async function getCourses() {
-    return courses
+// Backend document -> the shape the pages use.
+function toCourse(doc) {
+    return {
+        id: doc.id,
+        title: doc.title,
+        description: doc.description,
+        image: imageUrl(doc.image),
+        materials: (doc.materials ?? []).map(material => ({
+            id: material.id,
+            type: material.type,
+            title: material.title,
+            url: material.url,
+        })),
+    }
 }
 
-// Courses have no real timestamp yet, so the highest id counts as the latest.
+// Newest first.
+export async function getCourses() {
+    return (await listDocs('courses', { sort: '-createdAt' })).map(toCourse)
+}
+
 export async function getLatestCourses(count) {
-    return [...courses].sort((a, b) => b.id - a.id).slice(0, count)
+    return (await listDocs('courses', { sort: '-createdAt', limit: count })).map(toCourse)
 }
 
 export async function getCourse(id) {
-    return courses.find(course => course.id === Number(id)) ?? null
+    const doc = await getDoc('courses', id)
+    return doc ? toCourse(doc) : null
 }
