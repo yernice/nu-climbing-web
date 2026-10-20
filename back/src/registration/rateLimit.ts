@@ -1,6 +1,8 @@
 // At most 20 registration requests per IP in 10 minutes, against scripts filling events with fake
 // sign-ups. Generous on purpose: many students on the campus network can share one IP address.
-// Kept in memory, so it assumes one server process (a restart clears it).
+// Kept in memory, so it is exact on one server process. On Vercel every function instance has
+// its own memory and instances restart often, so there it only slows down simple scripts; the
+// rules that matter (capacity, one registration per email) are enforced by the database.
 
 const MAX_REQUESTS = 20
 const WINDOW_MS = 10 * 60 * 1000
@@ -20,9 +22,9 @@ export function allowRegistrationFrom(ip: string): boolean {
 
 // The visitor's address. Next.js sets x-forwarded-for to the real address only when the request
 // has no such header, and passes a visitor's own value through unchanged. So in production the
-// server must sit behind a reverse proxy (nginx, Caddy, the hosting platform) that appends the
-// real address: the last entry is then the one our own infrastructure added and can be trusted.
-// Exposed directly, a visitor could send a fake header to get a fresh limit.
+// server must sit behind a reverse proxy that sets the real address (Vercel does this itself;
+// on your own server use nginx or Caddy): the last entry is then the one our own infrastructure
+// added. Exposed directly, a visitor could send a fake header to get a fresh limit.
 export function clientIp(headers: Headers): string {
   const forwarded = headers.get('x-forwarded-for')
   return forwarded?.split(',').pop()?.trim() || 'unknown'

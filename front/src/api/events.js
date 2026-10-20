@@ -1,10 +1,23 @@
-import events from '../assets/events.js'
+import { API_URL, getDoc, imageUrl, listDocs, paragraphs } from './client.js'
 import { isPast } from '../utils/events.js'
 
-// Mock data layer. When the backend is ready, replace the bodies with fetch calls.
+// Backend document -> the shape the pages use. `registered` is counted by the backend.
+function toEvent(doc) {
+    return {
+        id: doc.id,
+        title: doc.title,
+        image: imageUrl(doc.image),
+        startDate: doc.startAt,
+        place: doc.place,
+        capacity: doc.capacity,
+        registered: doc.registered ?? 0,
+        text: paragraphs(doc.body),
+    }
+}
 
 // Upcoming events soonest first, then past events most recent first.
 export async function getEvents() {
+    const events = (await listDocs('events')).map(toEvent)
     const byDate = (a, b) => new Date(a.startDate) - new Date(b.startDate)
     const upcoming = events.filter(event => !isPast(event)).sort(byDate)
     const past = events.filter(isPast).sort((a, b) => byDate(b, a))
@@ -18,10 +31,9 @@ export async function getNextEvent() {
 }
 
 export async function getEvent(id) {
-    return events.find(event => event.id === Number(id)) ?? null
+    const doc = await getDoc('events', id)
+    return doc ? toEvent(doc) : null
 }
-
-const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:3000'
 
 // POST /api/events/:id/register on the backend (back/), which checks capacity, past events
 // and duplicate emails again. Resolves to { status: 'registered' } or

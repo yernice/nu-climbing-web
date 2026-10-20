@@ -1,3 +1,4 @@
+import { after } from 'next/server'
 import type { CollectionAfterChangeHook, Payload } from 'payload'
 
 // Sends a copy of each new registration to a Google Sheet through the Apps Script web app in
@@ -64,9 +65,16 @@ async function sendToSheet(payload: Payload, doc: RegistrationDoc): Promise<void
   }
 }
 
-// Runs after a registration is created; the copy is sent in the background so the visitor
-// never waits for Google.
+// Runs after a registration is created. The copy is sent after the response, so the visitor never
+// waits for Google. `after` also tells Vercel to keep the function alive until the copy is sent;
+// outside a web request (e.g. `npm run seed`) it is not available, so the copy just runs.
 export const copyToGoogleSheets: CollectionAfterChangeHook = ({ doc, operation, req }) => {
-  if (operation === 'create') void sendToSheet(req.payload, doc as RegistrationDoc)
+  if (operation !== 'create') return doc
+  const task = () => sendToSheet(req.payload, doc as RegistrationDoc)
+  try {
+    after(task)
+  } catch {
+    void task()
+  }
   return doc
 }

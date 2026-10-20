@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
     "build": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=8000\" next build",
+    "build:vercel": "node scripts/vercel-build.mjs",
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
     "seed": "cross-env NODE_OPTIONS=--no-deprecation payload run src/seed/examples.ts",
     "unseed": "cross-env NODE_OPTIONS=--no-deprecation payload run src/seed/examples.ts -- remove",
@@ -20,6 +21,7 @@
     "@payloadcms/db-postgres": "3.91.0",
     "@payloadcms/next": "3.91.0",
     "@payloadcms/richtext-lexical": "3.91.0",
+    "@payloadcms/storage-vercel-blob": "3.91.0",
     "@payloadcms/ui": "3.91.0",
     "cross-env": "^7.0.3",
     "dotenv": "16.4.7",

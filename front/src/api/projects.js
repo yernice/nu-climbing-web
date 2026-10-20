@@ -1,15 +1,26 @@
-import projects from '../assets/projects.js'
+import { getDoc, imageUrl, listDocs, paragraphs } from './client.js'
 
-// Mock data layer. When the backend is ready, replace the bodies with fetch calls.
-export async function getProjects() {
-    return projects
+// Backend document -> the shape the pages use.
+function toProject(doc) {
+    return {
+        id: doc.id,
+        title: doc.title,
+        image: imageUrl(doc.image),
+        text: paragraphs(doc.body),
+    }
 }
 
-// Projects have no real timestamp yet, so the highest id counts as the latest.
+// Newest first.
+export async function getProjects() {
+    return (await listDocs('projects', { sort: '-createdAt' })).map(toProject)
+}
+
 export async function getLatestProject() {
-    return projects.reduce((latest, project) => (!latest || project.id > latest.id ? project : latest), null)
+    const [latest] = await listDocs('projects', { sort: '-createdAt', limit: 1 })
+    return latest ? toProject(latest) : null
 }
 
 export async function getProject(id) {
-    return projects.find(project => project.id === Number(id)) ?? null
+    const doc = await getDoc('projects', id)
+    return doc ? toProject(doc) : null
 }

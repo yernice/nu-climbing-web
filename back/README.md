@@ -46,8 +46,10 @@ npm run unseed   # removes exactly those examples; your own content is never tou
 | `src/registration/` | Registration endpoint, validation rules, rate limit, Google Sheets copy |
 | `src/database/registrationGuards.ts` | PostgreSQL trigger that refuses registrations for a full event |
 | `src/seed/` | Example content and its placeholder images |
+| `src/migrations/` | Database changes for production (see "Changing collections later") |
+| `vercel.json`, `scripts/vercel-build.mjs` | Vercel build: migrations (production only), then `next build` |
 | `google-sheets/registrations.gs` | Apps Script for the Google Sheet |
-| `media/` | Uploaded images (gitignored). Back it up together with the database |
+| `media/` | Uploaded images on your computer (gitignored). On Vercel they go to Vercel Blob |
 
 Text fields (`body`) are plain text with paragraphs separated by an empty line. An event's
 "registered" number is counted from the registrations, never stored. Deleting an event also
@@ -101,3 +103,64 @@ Google is unreachable the registration is still saved (the server log says "not 
 
 After changing the script, deploy again with **Manage deployments > Edit > New version**, or the
 old code keeps running.
+
+## Changing collections later (database migrations)
+
+On your computer Payload changes the tables by itself (`npm run dev`). Production only changes them
+through files in `src/migrations`. So after you add or change a field:
+
+```
+npm run payload -- migrate:create describe-the-change
+```
+
+Commit the new file in `src/migrations` together with your change. Vercel runs it on the next
+production deploy. Do not run `payload migrate` on your computer: your local tables were made by
+`npm run dev` and Payload would ask confusing questions.
+
+## Deploying to Vercel
+
+The site and the backend are two Vercel projects from the same GitHub repository.
+
+**Before the first deploy:** the React site builds from git alone: `front/src/api/*.js` load
+everything from the backend, and `front/src/assets/` (no longer gitignored) holds `default_image.jpg`.
+The fonts (`front/src/assets/fonts/Tanker-Regular.otf`, `BespokeSerif-Regular.otf`, free from
+fontshare.com) are still missing: the site builds and works without them, but shows default fonts.
+
+**1. Backend project**
+1. On vercel.com: **Add New > Project**, import the repository, set **Root Directory** to `back`.
+   Framework is detected as Next.js. The build command comes from `back/vercel.json`.
+2. Before deploying, open the project's **Storage** tab:
+   - **Create Database > Neon (Postgres)**, region **Frankfurt**, connect it to this project.
+     This sets `DATABASE_URL`.
+   - **Create > Blob**, connect it to this project. This sets `BLOB_READ_WRITE_TOKEN`.
+3. **Settings > Environment Variables** (Production):
+   - `PAYLOAD_SECRET`: a new long random string (see `.env.example`), not the one on your computer.
+   - `SHEETS_WEBHOOK_URL`, `SHEETS_SECRET`: the same as in your local `.env`, if you use Google Sheets.
+   - `FRONT_URL`: the site's address, e.g. `https://nu-climbing.vercel.app` (fill in after step 2 below).
+   - `SERVER_URL` is optional: by default the project's own `https://...vercel.app` address is used.
+4. **Settings > Functions > Region**: Frankfurt (`fra1`), next to the database.
+5. **Deploy.** The build creates the tables (`payload migrate`) and builds the admin.
+6. Open `https://<backend>.vercel.app/admin` and create the admin account.
+
+**2. Site project**
+1. **Add New > Project**, the same repository, **Root Directory** `front`. Framework: Vite.
+2. Environment variable `VITE_API_URL` = `https://<backend>.vercel.app` (no slash at the end).
+3. **Deploy.** `front/vercel.json` makes links like `/blog/5` work when opened directly.
+4. Put the site's address in the backend's `FRONT_URL` and redeploy the backend
+   (**Deployments > ... > Redeploy**), otherwise the browser blocks the site's requests.
+
+**3. Check**
+- The site shows content you add in the admin; images load.
+- A registration succeeds, appears under **Registrations** and in the Google Sheet; the same email
+  twice is refused.
+
+**Good to know on Vercel**
+- Every push to `main` redeploys. Other branches get preview deployments; they do **not** run
+  migrations, so an unfinished branch can never change the real database.
+- After a quiet period the first request is slower (the function starts up).
+- The "20 registrations per IP" limit is only approximate there (see `src/registration/rateLimit.ts`);
+  full events and duplicate emails are still refused by the database.
+- Images live in the Blob store; the database lives in Neon. Back up with Neon's built-in history
+  (point-in-time restore) and, before big changes, a `pg_dump` of `DATABASE_URL`.
+- Vercel's free Hobby plan is for non-commercial use, and Vercel and Neon have no servers in
+  Kazakhstan: check with the university that registrations (names, phones) may be stored abroad.
