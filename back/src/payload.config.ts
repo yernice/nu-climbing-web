@@ -26,11 +26,21 @@ const serverURL =
     : 'http://localhost:3000')
 const frontURL = process.env.FRONT_URL || 'http://localhost:5173'
 
+// Payload accepts a login only from addresses in this list. Vercel serves every deployment under
+// several addresses (main domain, per-deploy, per-branch), so trust all of this project's own ones.
+const ownURLs = [
+  serverURL,
+  ...[process.env.VERCEL_URL, process.env.VERCEL_BRANCH_URL, process.env.VERCEL_PROJECT_PRODUCTION_URL]
+    .filter(Boolean)
+    .map((host) => `https://${host}`),
+]
+
 export default buildConfig({
   // Makes image URLs absolute (http://localhost:3000/api/media/file/...), so the React site can show them.
   serverURL,
   // The React site runs on another address, so the browser must be allowed to call this API.
   cors: [frontURL],
+  csrf: ownURLs,
   admin: {
     user: Users.slug,
     meta: { titleSuffix: ' | NU Climbing admin' },
