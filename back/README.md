@@ -136,7 +136,6 @@ fontshare.com) are still missing: the site builds and works without them, but sh
 3. **Settings > Environment Variables** (Production):
    - `PAYLOAD_SECRET`: a new long random string (see `.env.example`), not the one on your computer.
    - `SHEETS_WEBHOOK_URL`, `SHEETS_SECRET`: the same as in your local `.env`, if you use Google Sheets.
-   - `FRONT_URL`: the site's address, e.g. `https://nu-climbing.vercel.app` (fill in after step 2 below).
    - `SERVER_URL` is optional: by default the project's own `https://...vercel.app` address is used.
 4. **Settings > Functions > Region**: Frankfurt (`fra1`), next to the database.
 5. **Deploy.** The build creates the tables (`payload migrate`) and builds the admin.
@@ -146,8 +145,7 @@ fontshare.com) are still missing: the site builds and works without them, but sh
 1. **Add New > Project**, the same repository, **Root Directory** `front`. Framework: Vite.
 2. Environment variable `VITE_API_URL` = `https://<backend>.vercel.app` (no slash at the end).
 3. **Deploy.** `front/vercel.json` makes links like `/blog/5` work when opened directly.
-4. Put the site's address in the backend's `FRONT_URL` and redeploy the backend
-   (**Deployments > ... > Redeploy**), otherwise the browser blocks the site's requests.
+   The backend lets any website read its public data, so nothing else needs to point at the site.
 
 **3. Check**
 - The site shows content you add in the admin; images load.
