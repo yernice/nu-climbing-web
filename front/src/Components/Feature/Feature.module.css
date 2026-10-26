@@ -80,4 +80,17 @@
         height: 220px;
         min-height: 0;
     }
+
+    .box {
+        padding: 18px;
+        gap: 12px;
+    }
+
+    .box h2 {
+        font-size: 26px;
+    }
+
+    .text {
+        font-size: 17px;
+    }
 }

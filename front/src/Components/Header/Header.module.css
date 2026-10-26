@@ -1,3 +1,12 @@
+.header {
+    background-color: white;
+}
+
+/* Logo + menu button: phone only (shown in the media query below). */
+.bar {
+    display: none;
+}
+
 .navbar ul {
     font-size: 25px;
     font-family: 'HeadingFont', sans-serif;
@@ -21,4 +30,46 @@
 .navbar a:hover {
     background-color: black;
     color: white;
+}
+
+@media (max-width: 720px) {
+    .bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 6px 16px;
+        border-bottom: 2px solid black;
+    }
+
+    .logo img {
+        display: block;
+        height: 48px;
+        width: auto;
+    }
+
+    .menuButton {
+        display: flex;
+        padding: 8px;
+        border: none;
+        background: none;
+        color: var(--color-text);
+        cursor: pointer;
+    }
+
+    /* The links are a hidden vertical list until the menu button opens them. */
+    .navbar ul {
+        display: none;
+        flex-direction: column;
+        font-size: 22px;
+        border-bottom: 2px solid black;
+    }
+
+    .navbar ul.open {
+        display: flex;
+    }
+
+    .navbar a {
+        padding: 14px 16px;
+        text-align: left;
+    }
 }

@@ -60,3 +60,38 @@ h1 {
     font-size: 40px;
     font-family: 'HeadingFont', sans-serif;
 }
+
+/* ---------- Phones (720px wide and narrower) ---------- */
+/* Every component has its own @media (max-width: 720px) block at the end of its css file.
+   Keep the same 720px everywhere so the whole site switches layout at one width. */
+@media (max-width: 720px) {
+    .page {
+        padding: 0 16px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    .card-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    /* Home only: a grid on desktop, a sideways swipe row on phones. Each card takes
+       most of the width so the next one peeks in at the edge, showing there is more. */
+    .swipe-row {
+        display: flex;
+        gap: 12px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        margin: 0 -16px;
+        padding: 0 16px 8px;
+        scroll-padding: 0 16px;
+    }
+
+    .swipe-row > * {
+        flex: 0 0 85%;
+        scroll-snap-align: start;
+    }
+}
