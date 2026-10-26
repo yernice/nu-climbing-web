@@ -1,0 +1,18 @@
+.section {
+    max-width: 720px;
+    margin-bottom: 40px;
+}
+
+.section h2 {
+    margin: 0 0 10px;
+    font-size: 32px;
+    font-family: 'HeadingFont', sans-serif;
+    color: var(--color-text);
+}
+
+.section p {
+    margin: 0 0 12px;
+    font-size: 20px;
+    font-family: 'BodyFont', sans-serif;
+    line-height: 1.5;
+}

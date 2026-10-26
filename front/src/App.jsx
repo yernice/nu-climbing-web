@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./Components/Header/Header.jsx"
+import Footer from "./Components/Footer/Footer.jsx"
 import Home from "./pages/Home.jsx"
 import Blog from "./pages/Blog.jsx"
 import Post from "./pages/Post.jsx"
@@ -16,18 +17,21 @@ function App() {
     return (
         <BrowserRouter>
             <Header/>
-            <Routes>
-                <Route path="/" element={<Home/>}/>
-                <Route path="/blog" element={<Blog/>}/>
-                <Route path="/blog/:id" element={<Post/>}/>
-                <Route path="/projects" element={<Projects/>}/>
-                <Route path="/projects/:id" element={<Project/>}/>
-                <Route path="/events/:id" element={<Event/>}/>
-                <Route path="/events/:id/register" element={<EventRegister/>}/>
-                <Route path="/learning" element={<Learning/>}/>
-                <Route path="/learning/:id" element={<Course/>}/>
-                <Route path="/about" element={<About/>}/>
-            </Routes>
+            <div className="app-content">
+                <Routes>
+                    <Route path="/" element={<Home/>}/>
+                    <Route path="/blog" element={<Blog/>}/>
+                    <Route path="/blog/:id" element={<Post/>}/>
+                    <Route path="/projects" element={<Projects/>}/>
+                    <Route path="/projects/:id" element={<Project/>}/>
+                    <Route path="/events/:id" element={<Event/>}/>
+                    <Route path="/events/:id/register" element={<EventRegister/>}/>
+                    <Route path="/learning" element={<Learning/>}/>
+                    <Route path="/learning/:id" element={<Course/>}/>
+                    <Route path="/about" element={<About/>}/>
+                </Routes>
+            </div>
+            <Footer/>
         </BrowserRouter>
     );
 }
