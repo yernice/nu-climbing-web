@@ -18,3 +18,12 @@
     background-color: black;
     color: white;
 }
+
+/* Phone: the two tabs share the full width. */
+@media (max-width: 720px) {
+    .tab {
+        flex: 1;
+        font-size: 18px;
+        padding: 8px 10px;
+    }
+}

@@ -89,7 +89,7 @@ function Home() {
 
             <section className="page">
                 <h2 className={styles.heading}>Our Blog</h2>
-                <div className="card-grid">
+                <div className="card-grid swipe-row">
                     {posts.map(post => (
                         <Card
                             key={post.id}
@@ -108,7 +108,7 @@ function Home() {
 
             <section className="page">
                 <h2 className={styles.heading}>Learning Material</h2>
-                <div className="course-grid">
+                <div className="course-grid swipe-row">
                     {courses.map(course => (
                         <LearningCard
                             key={course.id}

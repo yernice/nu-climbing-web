@@ -23,3 +23,32 @@
 .action {
     margin-top: 15px;
 }
+
+/* Phone: shorter photo, the yellow box sits over its lower part at full width. */
+@media (max-width: 720px) {
+    .hero {
+        height: auto;
+        min-height: min(60vh, 520px);
+        align-items: flex-end;
+        padding: 16px;
+        margin-bottom: 32px;
+        box-sizing: border-box;
+    }
+
+    .box {
+        max-width: none;
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .box h1 {
+        margin: 0 0 8px;
+        font-size: 28px;
+    }
+
+    .box p {
+        margin: 0;
+        font-size: 17px;
+    }
+}

@@ -16,3 +16,17 @@
     font-family: 'BodyFont', sans-serif;
     line-height: 1.5;
 }
+
+@media (max-width: 720px) {
+    .section {
+        margin-bottom: 28px;
+    }
+
+    .section h2 {
+        font-size: 26px;
+    }
+
+    .section p {
+        font-size: 17px;
+    }
+}
