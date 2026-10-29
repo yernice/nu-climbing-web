@@ -4,7 +4,7 @@ import Feature from '../Components/Feature/Feature.jsx'
 import Button from '../Components/Button/Button.jsx'
 import Card from '../Components/Card/Card.jsx'
 import LearningCard from '../Components/LearningCard/LearningCard.jsx'
-import defaultImage from '../assets/default_image.jpg'
+import heroImage from '../assets/hero_image.jpg'
 import { getNextEvent } from '../api/events.js'
 import { getLatestProject } from '../api/projects.js'
 import { getLatestPosts } from '../api/posts.js'
@@ -44,9 +44,9 @@ function Home() {
     return (
         <>
             <Hero
-                heroImage={defaultImage}
-                heroTitle="Welcome to Our Club"
-                heroText="We're a community of climbers. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                heroImage={heroImage}
+                heroTitle="NU Climbing Club"
+                heroText="We are a group of students who share a passion for climbing, and we want to share it with everyone around us."
                 buttonText="Learn More"
                 buttonLink="/about"
             />
@@ -87,43 +87,47 @@ function Home() {
                 </section>
             )}
 
-            <section className="page">
-                <h2 className={styles.heading}>Our Blog</h2>
-                <div className="card-grid swipe-row">
-                    {posts.map(post => (
-                        <Card
-                            key={post.id}
-                            to={`/blog/${post.id}`}
-                            cardTitle={post.title}
-                            cardImage={post.image}
-                            cardDate={post.card_date}
-                            cardText={makeIntro(post.text)}
-                        />
-                    ))}
-                </div>
-                <div className={styles.seeAll}>
-                    <Button to="/blog">SEE ALL</Button>
-                </div>
-            </section>
+            {posts.length > 0 && (
+                <section className="page">
+                    <h2 className={styles.heading}>Our Blog</h2>
+                    <div className="card-grid swipe-row">
+                        {posts.map(post => (
+                            <Card
+                                key={post.id}
+                                to={`/blog/${post.id}`}
+                                cardTitle={post.title}
+                                cardImage={post.image}
+                                cardDate={post.card_date}
+                                cardText={makeIntro(post.text)}
+                            />
+                        ))}
+                    </div>
+                    <div className={styles.seeAll}>
+                        <Button to="/blog">SEE ALL</Button>
+                    </div>
+                </section>
+            )}
 
-            <section className="page">
-                <h2 className={styles.heading}>Learning Material</h2>
-                <div className="course-grid swipe-row">
-                    {courses.map(course => (
-                        <LearningCard
-                            key={course.id}
-                            to={`/learning/${course.id}`}
-                            image={course.image}
-                            title={course.title}
-                            description={course.description}
-                            materials={course.materials}
-                        />
-                    ))}
-                </div>
-                <div className={styles.seeAll}>
-                    <Button to="/learning">SEE ALL</Button>
-                </div>
-            </section>
+            {courses.length > 0 && (
+                <section className="page">
+                    <h2 className={styles.heading}>Learning Material</h2>
+                    <div className="course-grid swipe-row">
+                        {courses.map(course => (
+                            <LearningCard
+                                key={course.id}
+                                to={`/learning/${course.id}`}
+                                image={course.image}
+                                title={course.title}
+                                description={course.description}
+                                materials={course.materials}
+                            />
+                        ))}
+                    </div>
+                    <div className={styles.seeAll}>
+                        <Button to="/learning">SEE ALL</Button>
+                    </div>
+                </section>
+            )}
         </>
     );
 }

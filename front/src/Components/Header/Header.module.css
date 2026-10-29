@@ -1,5 +1,10 @@
+/* Sticks to the top of the window while the page scrolls; z-index keeps it above the content. */
 .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
     background-color: white;
+    border-bottom: 2px solid black;
 }
 
 /* Logo + menu button: phone only (shown in the media query below). */
@@ -38,7 +43,6 @@
         align-items: center;
         justify-content: space-between;
         padding: 6px 16px;
-        border-bottom: 2px solid black;
     }
 
     .logo img {
@@ -61,7 +65,7 @@
         display: none;
         flex-direction: column;
         font-size: 22px;
-        border-bottom: 2px solid black;
+        border-top: 1px solid black;
     }
 
     .navbar ul.open {
