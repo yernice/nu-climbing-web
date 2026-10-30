@@ -1,0 +1,104 @@
+.image {
+    display: block;
+    width: 100%;
+    max-height: 450px;
+    object-fit: cover;
+    margin: 20px 0;
+}
+
+.text p {
+    font-size: 20px;
+    font-family: 'BodyFont', sans-serif;
+    line-height: 1.5;
+    max-width: 720px;
+}
+
+.heading {
+    margin: 40px 0 16px;
+    font-size: 25px;
+    font-family: 'HeadingFont', sans-serif;
+}
+
+.schedule {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 320px;
+    margin: 0;
+    padding: 12px 16px;
+    background-color: var(--color-yellow);
+    color: var(--color-brown);
+}
+
+.schedule div {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.schedule dt {
+    font-size: 18px;
+    font-family: 'HeadingFont', sans-serif;
+}
+
+.schedule dd {
+    margin: 0;
+    font-size: 18px;
+    font-family: 'BodyFont', sans-serif;
+}
+
+.team {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.team li {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.team img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    margin-bottom: 6px;
+}
+
+.name {
+    font-size: 20px;
+    font-family: 'HeadingFont', sans-serif;
+}
+
+.role {
+    font-size: 16px;
+    font-family: 'BodyFont', sans-serif;
+    color: var(--color-brown);
+}
+
+.links {
+    list-style: none;
+    margin: 0 0 40px;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.links a {
+    display: inline-block;
+    padding: 10px 14px;
+    font-size: 18px;
+    font-family: 'HeadingFont', sans-serif;
+    color: white;
+    text-decoration: none;
+    background-color: var(--color-brown);
+}
+
+.links a:hover {
+    background-color: var(--color-brown-hover);
+}
