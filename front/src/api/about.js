@@ -8,6 +8,13 @@ export async function getAbout() {
         title: doc.title || 'About Us',
         image: doc.image ? imageUrl(doc.image) : null,
         text: paragraphs(doc.intro),
+        facts: (doc.facts ?? []).map(fact => ({ id: fact.id, value: fact.value, label: fact.label })),
+        motto: doc.motto ?? '',
+        activities: (doc.activities ?? []).map(activity => ({
+            id: activity.id,
+            title: activity.title,
+            text: activity.text,
+        })),
         schedule: (doc.schedule ?? []).map(item => ({
             id: item.id,
             day: item.day,

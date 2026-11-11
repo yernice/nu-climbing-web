@@ -19,6 +19,39 @@ export const About: GlobalConfig = {
       admin: { rows: 10, description: 'Who we are. Separate paragraphs with an empty line.' },
     },
     {
+      name: 'facts',
+      label: 'Key numbers',
+      type: 'array',
+      maxRows: 4,
+      labels: { singular: 'Number', plural: 'Numbers' },
+      admin: { description: 'Shown as a row of boxes under the text, e.g. "40+" / "members".' },
+      fields: [
+        {
+          type: 'row',
+          fields: [
+            { name: 'value', type: 'text', required: true, maxLength: 20, admin: { width: '35%', placeholder: '40+' } },
+            { name: 'label', type: 'text', required: true, maxLength: 60, admin: { width: '65%', placeholder: 'members' } },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'motto',
+      type: 'text',
+      maxLength: 200,
+      admin: { description: 'One short sentence, shown as a big banner.', placeholder: 'We believe climbing is for everyone!' },
+    },
+    {
+      name: 'activities',
+      label: 'What we do',
+      type: 'array',
+      labels: { singular: 'Activity', plural: 'Activities' },
+      fields: [
+        { name: 'title', type: 'text', required: true, maxLength: 100 },
+        { name: 'text', type: 'textarea', required: true, maxLength: 1000, admin: { rows: 4 } },
+      ],
+    },
+    {
       name: 'schedule',
       label: 'Training schedule',
       type: 'array',

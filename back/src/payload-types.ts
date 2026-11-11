@@ -536,6 +536,27 @@ export interface About {
    * Who we are. Separate paragraphs with an empty line.
    */
   intro?: string | null;
+  /**
+   * Shown as a row of boxes under the text, e.g. "40+" / "members".
+   */
+  facts?:
+    | {
+        value: string;
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * One short sentence, shown as a big banner.
+   */
+  motto?: string | null;
+  activities?:
+    | {
+        title: string;
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
   schedule?:
     | {
         day: string;
@@ -568,6 +589,21 @@ export interface AboutSelect<T extends boolean = true> {
   title?: T;
   image?: T;
   intro?: T;
+  facts?:
+    | T
+    | {
+        value?: T;
+        label?: T;
+        id?: T;
+      };
+  motto?: T;
+  activities?:
+    | T
+    | {
+        title?: T;
+        text?: T;
+        id?: T;
+      };
   schedule?:
     | T
     | {
