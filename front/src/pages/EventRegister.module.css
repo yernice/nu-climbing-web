@@ -50,3 +50,13 @@
     background-color: var(--color-yellow);
     color: var(--color-brown);
 }
+
+@media (max-width: 720px) {
+    .form {
+        max-width: none;
+    }
+
+    .message {
+        font-size: 17px;
+    }
+}

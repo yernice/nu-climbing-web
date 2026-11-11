@@ -30,3 +30,17 @@
     line-height: 1.5;
     max-width: 720px;
 }
+
+@media (max-width: 720px) {
+    .back {
+        font-size: 18px;
+    }
+
+    .image {
+        max-height: 260px;
+    }
+
+    .text p {
+        font-size: 17px;
+    }
+}

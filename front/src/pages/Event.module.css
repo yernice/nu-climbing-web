@@ -29,3 +29,17 @@
 .action {
     margin: 10px 0 40px;
 }
+
+/* Phone: the details box spans the full width. */
+@media (max-width: 720px) {
+    .details {
+        display: flex;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    .details dt,
+    .details dd {
+        font-size: 16px;
+    }
+}

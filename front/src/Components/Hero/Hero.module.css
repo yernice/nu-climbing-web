@@ -1,13 +1,22 @@
+/* Desktop: the photo fills the whole hero and the box sits on top of it. */
 .hero {
-    background-size: cover;
-    background-position: center;
+    position: relative;
     height: 700px;
     display: flex;
     align-items: center;
     padding-left: 190px;
+    margin-bottom: 50px;
+}
+
+.photo {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
 }
 
 .box {
+    position: relative;
     background-color: var(--color-yellow);
     color: var(--color-brown);
     padding: 30px;
@@ -21,4 +30,37 @@
 
 .action {
     margin-top: 15px;
+}
+
+/* Phone: the photo is a 320px strip and the box sits below it, pulled up 40px so it only
+   overlaps the photo's bottom edge. Change --overlap to adjust how much it covers. */
+@media (max-width: 720px) {
+    .hero {
+        --overlap: 40px;
+        display: block;
+        height: auto;
+        padding: 0;
+        margin-bottom: 32px;
+    }
+
+    .photo {
+        position: static;
+        height: 320px;
+    }
+
+    .box {
+        max-width: none;
+        margin: calc(-1 * var(--overlap)) 16px 0;
+        padding: 20px;
+    }
+
+    .box h1 {
+        margin: 0 0 8px;
+        font-size: 28px;
+    }
+
+    .box p {
+        margin: 0;
+        font-size: 17px;
+    }
 }

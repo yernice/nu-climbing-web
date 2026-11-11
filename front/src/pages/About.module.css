@@ -222,4 +222,13 @@
     .motto {
         font-size: 28px;
     }
+
+    /* Smaller text on phones, as on Yera's other pages */
+    .heading {
+        font-size: 26px;
+    }
+
+    .text p {
+        font-size: 17px;
+    }
 }

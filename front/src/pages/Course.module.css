@@ -52,3 +52,22 @@
 .materials a:hover {
     background-color: var(--color-brown-hover);
 }
+
+@media (max-width: 720px) {
+    .back {
+        font-size: 18px;
+    }
+
+    .description {
+        font-size: 17px;
+    }
+
+    .image {
+        max-height: 240px;
+    }
+
+    .materials a {
+        font-size: 16px;
+        padding: 10px 12px;
+    }
+}
