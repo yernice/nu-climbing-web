@@ -1,55 +1,123 @@
+import { useEffect, useState } from 'react'
+import { getAbout } from '../api/about.js'
 import styles from './About.module.css'
 
-// Placeholder copy: replace with the club's own text.
-const sections = [
-    {
-        title: "Who are we",
-        text: [
-            "NU Climbing Club is the rock climbing community of Nazarbayev University, Astana. " +
-            "We are a group of students who share a passion for climbing, and we want to share it " +
-            "with everyone around us.",
-            "The club was officially founded in February 2024, but began its actual functioning in August 2025, " +
-            "when we first found our mentor, Jeremy Spring, and conducted member recruitment. It started as a small " +
-            "group of friends who shared a love for climbing. Since then, it has grown into a big, " +
-            "close-knit community of around 40 members.",
-            "Our training sessions are led by our coach, Andrey, a qualified climbing professional who " +
-            "helps every member grow from the very basics. Beyond training, Andrey takes an active part " +
-            "in organizing our events and is always ready to share his expertise and advice on everything " +
-            "related to the sport.",
-            "But we’re not just about our own progress. We regularly organize events for students who want " +
-            "to give climbing a try.",
-            "Our main goal is to popularize rock climbing as a sport. We believe climbing is for everyone!",
-        ],
-    },
-    {
-        title: "What do we do",
-        text: [
-            "Open Training Sessions",
-            "Every two weeks we host open training sessions for all Nazarbayev University students. " +
-            "They’re a chance for anyone to try climbing for the first time, with no experience or " +
-            "equipment needed.",
-            "Competitions",
-            "Our members compete in climbing competitions in two disciplines: lead climbing and bouldering. " +
-            "We train hard, push our limits and represent NU on the wall.",
-            "Outdoor Trips",
-            "Within the club we organize trips to real rock, where members can take their skills outdoors and explore climbing in nature.",
-        ],
-    },
-]
-
+const initials = name => name.split(/\s+/).filter(Boolean).slice(0, 2).map(part => part[0].toUpperCase()).join('')
 
 function About() {
+    // undefined while loading, null if the backend could not be reached
+    const [about, setAbout] = useState(undefined)
+
+    useEffect(() => {
+        getAbout().then(setAbout)
+    }, [])
+
+    if (about === undefined) return <main className="page" />
+
+    if (!about) {
+        return (
+            <main className="page">
+                <h1>About Us</h1>
+            </main>
+        )
+    }
+
+    const { instagram, telegram, email } = about.links
+    const hasLinks = instagram || telegram || email
+
     return (
-        <main className="page">
-            <h1>About Us</h1>
-            {sections.map(section => (
-                <section key={section.title} className={styles.section}>
-                    <h2>{section.title}</h2>
-                    {section.text.map((paragraph, i) => (
-                        <p key={i}>{paragraph}</p>
-                    ))}
+        <main>
+            <section className={`page ${about.image ? styles.introWithImage : ''}`}>
+                <div>
+                    <h1>{about.title}</h1>
+                    {about.text.length > 0 && (
+                        <div className={styles.text}>
+                            {about.text.map((paragraph, i) => (
+                                <p key={i}>{paragraph}</p>
+                            ))}
+                        </div>
+                    )}
+                </div>
+                {about.image && <img src={about.image} alt={about.title} className={styles.image} />}
+            </section>
+
+            {about.facts.length > 0 && (
+                <section className="page">
+                    <dl className={styles.facts}>
+                        {about.facts.map(fact => (
+                            <div key={fact.id}>
+                                <dt>{fact.value}</dt>
+                                <dd>{fact.label}</dd>
+                            </div>
+                        ))}
+                    </dl>
                 </section>
-            ))}
+            )}
+
+            {about.motto && (
+                <section className={styles.band}>
+                    <p className={`page ${styles.motto}`}>{about.motto}</p>
+                </section>
+            )}
+
+            <div className="page">
+                {about.activities.length > 0 && (
+                    <section>
+                        <h2 className={styles.heading}>What we do</h2>
+                        <div className={styles.activities}>
+                            {about.activities.map((activity, i) => (
+                                <article key={activity.id} className={styles.activity}>
+                                    <span className={styles.number}>{String(i + 1).padStart(2, '0')}</span>
+                                    <h3>{activity.title}</h3>
+                                    <p>{activity.text}</p>
+                                </article>
+                            ))}
+                        </div>
+                    </section>
+                )}
+
+                {about.schedule.length > 0 && (
+                    <section>
+                        <h2 className={styles.heading}>Training schedule</h2>
+                        <dl className={styles.schedule}>
+                            {about.schedule.map(item => (
+                                <div key={item.id}>
+                                    <dt>{item.day}</dt>
+                                    <dd>{item.place ? `${item.time}, ${item.place}` : item.time}</dd>
+                                </div>
+                            ))}
+                        </dl>
+                    </section>
+                )}
+
+                {about.team.length > 0 && (
+                    <section>
+                        <h2 className={styles.heading}>Our team</h2>
+                        <ul className={styles.team}>
+                            {about.team.map(person => (
+                                <li key={person.id}>
+                                    {person.photo
+                                        ? <img src={person.photo} alt={person.name} />
+                                        : <span className={styles.initials} aria-hidden="true">{initials(person.name)}</span>}
+                                    <span className={styles.name}>{person.name}</span>
+                                    {person.role && <span className={styles.role}>{person.role}</span>}
+                                </li>
+                            ))}
+                        </ul>
+                    </section>
+                )}
+
+                {hasLinks && (
+                    <section>
+                        <h2 className={styles.heading}>Contact us</h2>
+                        <ul className={styles.links}>
+                            {instagram && <li><a href={instagram} target="_blank" rel="noopener noreferrer">Instagram</a></li>}
+                            {telegram && <li><a href={telegram} target="_blank" rel="noopener noreferrer">Telegram</a></li>}
+                            {email && <li><a href={`mailto:${email}`}>{email}</a></li>}
+                        </ul>
+                    </section>
+                )}
+            </div>
         </main>
     );
 }

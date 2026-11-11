@@ -43,6 +43,7 @@ npm run unseed   # removes exactly those examples; your own content is never tou
 |---|---|
 | `src/payload.config.ts` | Main config: collections, database, CORS for the site, image size limit |
 | `src/collections/` | One file per collection (fields, who can read/edit, admin columns) |
+| `src/globals/` | Single pages edited in the admin: `About.ts` is the site's "About us" page |
 | `src/registration/` | Registration endpoint, validation rules, rate limit, Google Sheets copy |
 | `src/database/registrationGuards.ts` | PostgreSQL trigger that refuses registrations for a full event |
 | `src/seed/` | Example content and its placeholder images |

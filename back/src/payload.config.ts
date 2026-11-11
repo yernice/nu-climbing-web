@@ -14,6 +14,7 @@ import { Projects } from './collections/Projects'
 import { Registrations } from './collections/Registrations'
 import { Users } from './collections/Users'
 import { addRegistrationGuards } from './database/registrationGuards'
+import { About } from './globals/About'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -49,6 +50,7 @@ export default buildConfig({
     },
   },
   collections: [Posts, Projects, Events, Registrations, Courses, Media, Users],
+  globals: [About],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

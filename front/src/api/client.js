@@ -27,6 +27,11 @@ export async function getDoc(collection, id) {
     return fetchJson(`${collection}/${encodeURIComponent(id)}?depth=1`)
 }
 
+// A single page edited in the admin (a Payload "global"), e.g. getGlobal('about'). Null if unavailable.
+export async function getGlobal(slug) {
+    return fetchJson(`globals/${slug}?depth=1`)
+}
+
 // The admin types paragraphs separated by an empty line; the pages expect an array of paragraphs.
 export function paragraphs(text) {
     return (text ?? '').split(/\r?\n\s*\r?\n/).map(paragraph => paragraph.trim()).filter(Boolean)
