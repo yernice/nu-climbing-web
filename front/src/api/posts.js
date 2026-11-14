@@ -10,7 +10,9 @@ function toPost(doc) {
         title: doc.title,
         image: imageUrl(doc.image),
         card_date: `${pad(date.getDate())}.${pad(date.getMonth() + 1)}.${date.getFullYear()}`,
-        text: paragraphs(doc.body),
+        // Formatted text for the page itself, plain paragraphs for card previews.
+        html: doc.bodyHtml ?? '',
+        text: paragraphs(doc.bodyText),
     }
 }
 

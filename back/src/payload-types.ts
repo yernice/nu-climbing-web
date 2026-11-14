@@ -144,10 +144,23 @@ export interface Post {
   title: string;
   image?: (number | null) | Media;
   publishedAt: string;
-  /**
-   * Separate paragraphs with an empty line.
-   */
-  body: string;
+  body: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  bodyHtml?: string | null;
+  bodyText?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -182,10 +195,23 @@ export interface Project {
   id: number;
   title: string;
   image?: (number | null) | Media;
-  /**
-   * Separate paragraphs with an empty line.
-   */
-  body: string;
+  body: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  bodyHtml?: string | null;
+  bodyText?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -204,10 +230,23 @@ export interface Event {
    */
   registered?: number | null;
   place: string;
-  /**
-   * Separate paragraphs with an empty line.
-   */
-  body: string;
+  body: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  bodyHtml?: string | null;
+  bodyText?: string | null;
   registrations?: {
     docs?: (number | Registration)[];
     hasNextPage?: boolean;
@@ -380,6 +419,8 @@ export interface PostsSelect<T extends boolean = true> {
   image?: T;
   publishedAt?: T;
   body?: T;
+  bodyHtml?: T;
+  bodyText?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -391,6 +432,8 @@ export interface ProjectsSelect<T extends boolean = true> {
   title?: T;
   image?: T;
   body?: T;
+  bodyHtml?: T;
+  bodyText?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -406,6 +449,8 @@ export interface EventsSelect<T extends boolean = true> {
   registered?: T;
   place?: T;
   body?: T;
+  bodyHtml?: T;
+  bodyText?: T;
   registrations?: T;
   updatedAt?: T;
   createdAt?: T;

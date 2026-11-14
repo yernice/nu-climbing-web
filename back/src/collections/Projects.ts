@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { anyone } from '../access'
-import { bodyField, imageField, titleField } from '../fields'
+import { bodyFields, imageField, titleField } from '../fields'
 
 export const Projects: CollectionConfig = {
   slug: 'projects',
@@ -8,5 +8,5 @@ export const Projects: CollectionConfig = {
   admin: { useAsTitle: 'title', defaultColumns: ['title', 'updatedAt'] },
   defaultSort: '-createdAt',
   access: { read: anyone },
-  fields: [titleField, imageField, bodyField()],
+  fields: [titleField, imageField, ...bodyFields()],
 }

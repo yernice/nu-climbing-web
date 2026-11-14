@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { anyone } from '../access'
-import { bodyField, imageField, titleField } from '../fields'
+import { bodyFields, imageField, titleField } from '../fields'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
@@ -19,6 +19,6 @@ export const Posts: CollectionConfig = {
       defaultValue: () => new Date().toISOString(),
       admin: { position: 'sidebar', date: { pickerAppearance: 'dayAndTime' } },
     },
-    bodyField(),
+    ...bodyFields(),
   ],
 }

@@ -11,7 +11,9 @@ function toEvent(doc) {
         place: doc.place,
         capacity: doc.capacity,
         registered: doc.registered ?? 0,
-        text: paragraphs(doc.body),
+        // Formatted text for the page itself, plain paragraphs for card previews.
+        html: doc.bodyHtml ?? '',
+        text: paragraphs(doc.bodyText),
     }
 }
 

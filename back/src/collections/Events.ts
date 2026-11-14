@@ -1,6 +1,6 @@
 import type { CollectionBeforeDeleteHook, CollectionConfig, FieldHook } from 'payload'
 import { anyone } from '../access'
-import { bodyField, imageField, titleField } from '../fields'
+import { bodyFields, imageField, titleField } from '../fields'
 import { registerEndpoint } from '../registration/registerEndpoint'
 
 // `registered` is never stored: it is counted from the registrations every time an event is read.
@@ -58,7 +58,7 @@ export const Events: CollectionConfig = {
       ],
     },
     { name: 'place', type: 'text', required: true, maxLength: 200 },
-    bodyField('Description'),
+    ...bodyFields('Description'),
     {
       // Shows the event's registrations on its edit page. Admin only: names and phones are private.
       name: 'registrations',
