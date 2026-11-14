@@ -6,6 +6,7 @@ import config from '@payload-config'
 import path from 'path'
 import { getPayload } from 'payload'
 import { fileURLToPath } from 'url'
+import { plainToRichText } from '../richText'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 const image = (n: number) => path.join(dirname, 'images', `placeholder-${n}.jpg`)
@@ -144,17 +145,17 @@ if (remove) {
   const oldestFirst = [...posts].sort((a, b) => a.publishedAt.localeCompare(b.publishedAt))
   for (const { img, ...post } of oldestFirst) {
     if (await titled('posts', post.title)) continue
-    await payload.create({ collection: 'posts', data: { ...post, image: await upload(img) } })
+    await payload.create({ collection: 'posts', data: { ...post, body: plainToRichText(post.body), image: await upload(img) } })
     added++
   }
   for (const { img, ...project } of projects) {
     if (await titled('projects', project.title)) continue
-    await payload.create({ collection: 'projects', data: { ...project, image: await upload(img) } })
+    await payload.create({ collection: 'projects', data: { ...project, body: plainToRichText(project.body), image: await upload(img) } })
     added++
   }
   for (const { img, ...event } of events) {
     if (await titled('events', event.title)) continue
-    await payload.create({ collection: 'events', data: { ...event, image: await upload(img) } })
+    await payload.create({ collection: 'events', data: { ...event, body: plainToRichText(event.body), image: await upload(img) } })
     added++
   }
   for (const { img, materials, ...course } of courses) {

@@ -52,11 +52,8 @@ function Event() {
                     <dd>{formatSlots(event)}</dd>
                 </div>
             </dl>
-            <div className={postStyles.text}>
-                {event.text.map((paragraph, i) => (
-                    <p key={i}>{paragraph}</p>
-                ))}
-            </div>
+            {/* Formatted text from the admin editor; the backend builds this HTML and escapes it. */}
+            <div className={postStyles.text} dangerouslySetInnerHTML={{ __html: event.html }} />
             <div className={styles.action}>
                 <Button to={`/events/${event.id}/register`} disabled={state !== 'open'}>
                     {registrationLabels[state]}

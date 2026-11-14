@@ -34,11 +34,8 @@ function Post() {
             <h1>{post.title}</h1>
             <span className={styles.date}>{post.card_date}</span>
             <img src={post.image} alt={post.title} className={styles.image} />
-            <div className={styles.text}>
-                {post.text.map((paragraph, i) => (
-                    <p key={i}>{paragraph}</p>
-                ))}
-            </div>
+            {/* Formatted text from the admin editor; the backend builds this HTML and escapes it. */}
+            <div className={styles.text} dangerouslySetInnerHTML={{ __html: post.html }} />
         </main>
     );
 }

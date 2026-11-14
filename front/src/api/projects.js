@@ -6,7 +6,9 @@ function toProject(doc) {
         id: doc.id,
         title: doc.title,
         image: imageUrl(doc.image),
-        text: paragraphs(doc.body),
+        // Formatted text for the page itself, plain paragraphs for card previews.
+        html: doc.bodyHtml ?? '',
+        text: paragraphs(doc.bodyText),
     }
 }
 

@@ -33,11 +33,8 @@ function Project() {
             <Link to="/projects?tab=projects" className={styles.back}>← Back to projects</Link>
             <h1>{project.title}</h1>
             <img src={project.image} alt={project.title} className={styles.image} />
-            <div className={styles.text}>
-                {project.text.map((paragraph, i) => (
-                    <p key={i}>{paragraph}</p>
-                ))}
-            </div>
+            {/* Formatted text from the admin editor; the backend builds this HTML and escapes it. */}
+            <div className={styles.text} dangerouslySetInnerHTML={{ __html: project.html }} />
         </main>
     );
 }
